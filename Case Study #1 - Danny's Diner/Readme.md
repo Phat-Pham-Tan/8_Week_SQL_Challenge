@@ -18,7 +18,7 @@ Danny’s Dinner is in need of your assistance to help the restaurant stay afloa
 
 ## Data 
 
-<img width="500" src="https://user-images.githubusercontent.com/94410139/158030281-2ea04216-34dd-41a3-adb6-f6df1cfb4c1a.png">
+<img width="500" src="[https://user-images.githubusercontent.com/94410139/158030281-2ea04216-34dd-41a3-adb6-f6df1cfb4c1a.png](https://8weeksqlchallenge.com/images/case-study-designs/1.png)">
 
 ## Questions
 
