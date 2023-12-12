@@ -14,7 +14,12 @@ ON sales.product_id = menu.product_id
 GROUP BY customer_id;
 ```
 #### Result 
-![1](https://user-images.githubusercontent.com/101379141/195239786-d226d0f5-f2df-4ad5-8af7-1d4f1328c091.PNG)
+||customer_id | Total_Spent |
+|---|---|---|
+| 1 | A | 76 |
+| 2 | B | 74 |
+| 3 | C | 36 |
+
 
 
 #
@@ -28,7 +33,11 @@ FROM sales
 GROUP BY sales.customer_id;
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/101379141/195240029-ed43606c-04e1-4294-a556-d7e5ef63c733.png)
+||customer_id | Total_Spent |
+|---|---|---|
+| 1 | A | 4 |
+| 2 | B | 6 |
+| 3 | C | 2 |
 
 #
 
@@ -57,12 +66,34 @@ WHERE RANK =1
 ```
 #### PURCHASED_RANK table output:
 
-  ![image](https://user-images.githubusercontent.com/101379141/195240779-8e92b247-2439-4d05-a9e5-5d8c5b91c062.png)
+  | customer_id | order_date | product_name | RANK |
+|---|---|---|---|
+| 1 | 2021-01-01 | sushi | 1 |
+| 2 | 2021-01-01 | curry | 1 |
+| 3 | 2021-01-01 | curry | 1 |
+| 4 | 2021-01-01 | ramen | 1 |
+| 5 | 2021-01-01 | ramen | 1 |
+| 6 | 2021-01-02 | curry | 2 |
+| 7 | 2021-01-04 | sushi | 3 |
+| 8 | 2021-01-07 | curry | 4 |
+| 9 | 2021-01-07 | ramen | 4 |
+| 10 | 2021-01-10 | ramen | 5 |
+| 11 | 2021-01-11 | ramen | 6 |
+| 12 | 2021-01-11 | ramen | 6 |
+| 13 | 2021-01-11 | sushi | 6 |
+| 14 | 2021-01-16 | ramen | 7 |
+| 15 | 2021-02-01 | ramen | 8 |
+
 
   
 #### Question Result: 
 
-  ![image](https://user-images.githubusercontent.com/101379141/195240845-06d17220-da1c-4c36-8705-442f4b45ad34.png)
+|| customer_id | product_name |
+|---|---|---|
+| 1 | A | curry |
+| 2 | A | sushi |
+| 3 | B | curry |
+| 4 | C | ramen |
 
 
   - Customer A's first orders were Curry & Sushi
@@ -82,7 +113,9 @@ GROUP BY s.product_id, product_name
 ORDER BY most_purchased DESC
  ```
  #### Result
-![image](https://user-images.githubusercontent.com/101379141/195241146-aaad00b0-3f07-4922-9a71-2008899df3c5.png)
+|   | most_purchased | product_name |
+|---|----------------|--------------|
+| 1 | 8              | ramen        |
 
 
 #
@@ -114,11 +147,25 @@ WHERE RANK =1;
 ```
 
 #### rank_favorite_item table output:
-  ![image](https://user-images.githubusercontent.com/101379141/195241494-fe29e637-b037-41a5-97ac-2624e5a0c3eb.png)
-
+|  | customer_id | product_name | NUMBER_ORDER | RANK |
+|--|-------------|--------------|--------------|------|
+| 1| A           | ramen        | 3            | 1    |
+| 2| A           | curry        | 2            | 2    |
+| 3| A           | sushi        | 1            | 3    |
+| 4| B           | sushi        | 2            | 1    |
+| 5| B           | curry        | 2            | 1    |
+| 6| B           | ramen        | 2            | 1    |
+| 7| C           | ramen        | 3            | 1    |
 
 #### Question Result:
-  ![image](https://user-images.githubusercontent.com/101379141/195241578-55a26af0-874a-432c-916c-02f4055ae9f8.png)
+ |  | customer_id | product_name | order_count |
+|--|-------------|--------------|-------------|
+| 1| A           | ramen        | 3           |
+| 2| B           | sushi        | 2           |
+| 3| B           | curry        | 2           |
+| 4| B           | ramen        | 2           |
+| 5| C           | ramen        | 3           |
+
 
 - Customer A's favourite item is Ramen
 - Customer B likes all items 
@@ -157,11 +204,21 @@ WHERE RANK =1;
 ```
 #### rank_purchase_item table output:
 
-![image](https://user-images.githubusercontent.com/101379141/195242365-6a550795-7b3e-4ed4-ab3d-b82ff8e90685.png)
-
+|  | customer_id | product_name | order_date | join_date | RANK |
+|--|-------------|--------------|------------|-----------|-----|
+| 1| A           | curry        | 2021-01-07 | 2021-01-07| 1   |
+| 2| A           | ramen        | 2021-01-10 | 2021-01-07| 2   |
+| 3| A           | ramen        | 2021-01-11 | 2021-01-07| 3   |
+| 4| A           | ramen        | 2021-01-11 | 2021-01-07| 3   |
+| 5| B           | sushi        | 2021-01-11 | 2021-01-09| 1   |
+| 6| B           | ramen        | 2021-01-16 | 2021-01-09| 2   |
+| 7| B           | ramen        | 2021-02-01 | 2021-01-09| 3   |
 
 #### Result
-![image](https://user-images.githubusercontent.com/101379141/195242423-438ec3b1-a5dc-47af-81e9-6c1c19242aaa.png)
+|  | customer_id | product_name |
+|--|-------------|--------------|
+| 1| A           | ramen        |
+| 2| B           | sushi        |
 
 - Customer A purchased Curry firstly 
 - Customer B puchased Sushi firstly
@@ -198,8 +255,11 @@ FROM rank_purchase_order
 WHERE RANK =1
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/101379141/195243167-bd39a9d5-86c5-4cfb-839c-8693d6cda346.png)
-
+|  | customer_id | product_name |
+|--|-------------|--------------|
+| 1| A           | sushi        |
+| 2| A           | curry        |
+| 3| B           | sushi        |
 
 - Customer A's last item purchased before becoming a member was Sushi & Curry
 - Customer B's was Sushi
@@ -221,7 +281,10 @@ WHERE sales.order_date < members.join_date
 GROUP BY sales.customer_id;
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/101379141/195243359-53025f99-414e-4872-a41a-6121f4af2a71.png)
+|  | customer_id | total_item | Total_amount_spent |
+|--|-------------|------------|---------------------|
+| 1| A           | 2          | 25                  |
+| 2| B           | 3          | 40                  |
 
 #
 
@@ -244,8 +307,11 @@ JOIN menu M ON S.product_id = M.product_id
 GROUP BY  customer_id;
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/101379141/195244511-27eeec89-23af-4bb1-b52b-eccd64d04a7a.png)
-
+|  | customer_id | total_point |
+|--|-------------|-------------|
+| 1| A           | 860         |
+| 2| B           | 940         |
+| 3| C           | 360         |
 
 # 
 
@@ -277,7 +343,10 @@ WHERE d.customer_id = s.customer_id
 GROUP BY s.customer_id;
 ```
 #### Result
-![image](https://user-images.githubusercontent.com/101379141/195245665-a61d3320-82bb-4908-af12-5c787c2f32e1.png)
+|  | customer_id | total_points |
+|--|-------------|--------------|
+| 1| A           | 1370         |
+| 2| B           | 820          |
 
 ---
 
@@ -287,13 +356,6 @@ GROUP BY s.customer_id;
 ###  Join all Thing & Rank All Things 
 
 - Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
-- Replicate this output:
-
-  <img width="300" src ="https://user-images.githubusercontent.com/101379141/195248839-b0d64ca9-7fc5-4e5e-bcd4-2db9769844a5.png">
-  <img width="300" src="https://user-images.githubusercontent.com/101379141/195249157-85f417e7-47e4-4f51-b951-9a19f608290d.png">
- 
-
-#
 - Join all Thing :For this create a CTE (named as member_table) to have column 'member' by order_date >= join_date.
 - Rank All Things :Then SELECT everything from that table and add a new column for the ranking.
    - For the RANK we need to `PARTITION by both customer_id and member`.
@@ -318,7 +380,39 @@ SELECT  customer_id,
 FROM member_table
  ```
 #### Result Join all Thing 
-![image](https://user-images.githubusercontent.com/101379141/195248725-0fd80f0b-5e74-4442-b463-37f0c238ae1a.png)
+|  | customer_id | order_date | product_name | price | member |
+|--|-------------|------------|--------------|-------|--------|
+| 1| A           | 2021-01-01 | sushi        | 10    | N      |
+| 2| A           | 2021-01-01 | curry        | 15    | N      |
+| 3| A           | 2021-01-07 | curry        | 15    | Y      |
+| 4| A           | 2021-01-10 | ramen        | 12    | Y      |
+| 5| A           | 2021-01-11 | ramen        | 12    | Y      |
+| 6| A           | 2021-01-11 | ramen        | 12    | Y      |
+| 7| B           | 2021-01-01 | curry        | 15    | N      |
+| 8| B           | 2021-01-02 | curry        | 15    | N      |
+| 9| B           | 2021-01-04 | sushi        | 10    | N      |
+|10| B           | 2021-01-11 | sushi        | 10    | Y      |
+|11| B           | 2021-01-16 | ramen        | 12    | Y      |
+|12| B           | 2021-02-01 | ramen        | 12    | Y      |
+|13| C           | 2021-01-01 | ramen        | 12    | N      |
+|14| C           | 2021-01-01 | ramen        | 12    | N      |
+|15| C           | 2021-01-07 | ramen        | 12    | N      |
 
 #### Result Rank All Things 
-![image](https://user-images.githubusercontent.com/101379141/195246512-67e21eb2-0c3b-4795-81b8-f6d4ea650f1f.png)
+|  | customer_id | order_date | product_name | price | member | ranking |
+|--|-------------|------------|--------------|-------|--------|---------|
+| 1| A           | 2021-01-01 | sushi        | 10    | N      | Null    |
+| 2| A           | 2021-01-01 | curry        | 15    | N      | Null    |
+| 3| A           | 2021-01-07 | curry        | 15    | Y      | 1       |
+| 4| A           | 2021-01-10 | ramen        | 12    | Y      | 2       |
+| 5| A           | 2021-01-11 | ramen        | 12    | Y      | 3       |
+| 6| A           | 2021-01-11 | ramen        | 12    | Y      | 3       |
+| 7| B           | 2021-01-01 | curry        | 15    | N      | Null    |
+| 8| B           | 2021-01-02 | curry        | 15    | N      | Null    |
+| 9| B           | 2021-01-04 | sushi        | 10    | N      | Null    |
+|10| B           | 2021-01-11 | sushi        | 10    | Y      | 1       |
+|11| B           | 2021-01-16 | ramen        | 12    | Y      | 2       |
+|12| B           | 2021-02-01 | ramen        | 12    | Y      | 3       |
+|13| C           | 2021-01-01 | ramen        | 12    | N      | Null    |
+|14| C           | 2021-01-01 | ramen        | 12    | N      | Null    |
+|15| C           | 2021-01-07 | ramen        | 12    | N      | Null    |
